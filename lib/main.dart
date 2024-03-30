@@ -62,24 +62,65 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Green Plant Guide'),
+      ),
       body: Center(
         // FutureBuilder
-        child: FutureBuilder<List<Faq>>(
-          future: faqsFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              // until data is fetched, show loader
-              return const CircularProgressIndicator();
-            } else if (snapshot.hasData) {
-              // once data is fetched, display it on screen (call buildFaqs())
-              final list = snapshot.data!;
-              return buildFaqs(list);
-              // return buildPlants(list);
-            } else {
-              // if no data, show simple Text
-              return const Text("No data available");
-            }
-          },
+        child: Row (
+          children: <Widget> [
+            Expanded(
+              child: Center (
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      elevation: 12.0,
+                      backgroundColor: Colors.green,
+                      padding: const EdgeInsets.all(24.0),
+                      textStyle: const TextStyle(fontSize: 22.0)
+                  ),
+                  child: const Text(
+                    'Open Faq',
+                    style: TextStyle(color: Colors.white, fontSize: 22.0), // Set text color and size here
+                  ),
+                ),
+              )
+            ),
+            Expanded(
+              child: Center(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      elevation: 12.0,
+                      backgroundColor: Colors.green,
+                      padding: const EdgeInsets.all(24.0),
+                      textStyle: const TextStyle(fontSize: 22.0)
+                  ),
+                  child: const Text(
+                    'List Plants',
+                    style: TextStyle(color: Colors.white, fontSize: 22.0), // Set text color and size here
+                  ),
+                ),
+              )
+            )
+            // FutureBuilder<List<Faq>>(
+            //   future: faqsFuture,
+            //   builder: (context, snapshot) {
+            //     if (snapshot.connectionState == ConnectionState.waiting) {
+            //       // until data is fetched, show loader
+            //       return const CircularProgressIndicator();
+            //     } else if (snapshot.hasData) {
+            //       // once data is fetched, display it on screen (call buildFaqs())
+            //       final list = snapshot.data!;
+            //       return buildFaqs(list);
+            //       // return buildPlants(list);
+            //     } else {
+            //       // if no data, show simple Text
+            //       return const Text("No data available");
+            //     }
+            //   },
+            // ),
+          ],
         ),
       ),
     );
