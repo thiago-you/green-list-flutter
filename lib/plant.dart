@@ -1,4 +1,4 @@
-class Post {
+class Plant {
   int? id;
   String? name;
   String? scientificName;
@@ -9,7 +9,7 @@ class Post {
   String? image;
   String? thumbnail;
 
-  Post({
+  Plant({
     this.id,
     this.name,
     this.scientificName,
@@ -21,7 +21,7 @@ class Post {
     this.thumbnail
   });
 
-  Post.fromJson(Map<String, dynamic> json) {
+  Plant.fromJson(Map<String, dynamic> json) {
     id = json['title'];
     name = json['common_name'];
     scientificName = json['scientific_name'].isEmpty ? null : json['scientific_name'][0];
@@ -35,6 +35,6 @@ class Post {
 
   @override
   String toString() {
-    return 'Post{id: $id, name: $name, scientificName: $scientificName, otherName: $otherName, cycle: $cycle, watering: $watering, sunlight: $sunlight, image: $image, thumbnail: $thumbnail}';
+    return 'Plant{id: $id, name: $name, scientificName: $scientificName, otherName: $otherName, cycle: $cycle, watering: $watering, sunlight: $sunlight, image: $image, thumbnail: $thumbnail}';
   }
 }

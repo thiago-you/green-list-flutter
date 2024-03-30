@@ -1,40 +1,31 @@
-class Post {
+class Faq {
   int? id;
-  String? name;
-  String? scientificName;
-  String? otherName;
-  String? cycle;
-  String? watering;
-  String? sunlight;
+  String? question;
+  String? answer;
   String? image;
+  String? imageAlt;
   String? thumbnail;
 
-  Post({
+  Faq({
     this.id,
-    this.name,
-    this.scientificName,
-    this.otherName,
-    this.cycle,
-    this.watering,
-    this.sunlight,
+    this.question,
+    this.answer,
     this.image,
+    this.imageAlt,
     this.thumbnail
   });
 
-  Post.fromJson(Map<String, dynamic> json) {
-    id = json['title'];
-    name = json['common_name'];
-    scientificName = json['scientific_name'].isEmpty ? null : json['scientific_name'][0];
-    otherName = json['other_name'].isEmpty ? null : json['other_name'][0];
-    cycle = json['cycle'];
-    watering = json['watering'];
-    sunlight = json['sunlight'].isEmpty ? null : json['sunlight'][0];
+  Faq.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    question = json['question'];
+    answer = json['answer'];
     image = json['default_image']?['original_url'] ?? "";
-    thumbnail = json['default_image']?['thumbnail'] ?? "";
+    imageAlt = json['default_image']?['regular_url'] ?? "";
+    thumbnail = json['default_image']?['medium_url'] ?? "";
   }
 
   @override
   String toString() {
-    return 'Post{id: $id, name: $name, scientificName: $scientificName, otherName: $otherName, cycle: $cycle, watering: $watering, sunlight: $sunlight, image: $image, thumbnail: $thumbnail}';
+    return 'FAQ{id: $id, question: $question, answer: $answer, image: $image, imageAlt: $imageAlt, thumbnail: $thumbnail}';
   }
 }

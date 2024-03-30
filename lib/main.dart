@@ -1,7 +1,8 @@
 import 'dart:convert';
+import 'package:greenlist/faq.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:greenlist/post.dart';
+import 'package:greenlist/plant.dart';
 
 // app starting point
 void main() {
@@ -31,16 +32,30 @@ class MyHomePage extends StatefulWidget {
 // homepage state
 class _MyHomePageState extends State<MyHomePage> {
 
-  // variable to call and store future list of posts
-  Future<List<Post>> postsFuture = getPosts();
+  // API key
   static String? auth = "sk-B8oH6608468daafa24915";
+  static String? defaultThumbnail = "https://perenual.com/storage/article_faq/faq_13Y7nX6435fb7c71c37/medium.jpg";
 
-  // function to fetch data from api and return future list of posts
-  static Future<List<Post>> getPosts() async {
+  // variable to call and store future list of plants
+  Future<List<Plant>> plantsFuture = getPlants();
+
+  // variable to call and store future list of faqs
+  Future<List<Faq>> faqsFuture = getFaqs();
+
+  // function to fetch data from api and return future list of plants
+  static Future<List<Plant>> getPlants() async {
     var url = Uri.parse("https://perenual.com/api/species-list?key=$auth");
     final response = await http.get(url, headers: {"Content-Type": "application/json"});
     final List<dynamic> body = json.decode(response.body)["data"];
-    return body.map((e) => Post.fromJson(e)).toList();
+    return body.map((e) => Plant.fromJson(e)).toList();
+  }
+
+  // function to fetch data from api and return future list of posts
+  static Future<List<Faq>> getFaqs() async {
+    var url = Uri.parse("https://perenual.com/api/article-faq-list?key=$auth");
+    final response = await http.get(url, headers: {"Content-Type": "application/json"});
+    final List<dynamic> body = json.decode(response.body)["data"];
+    return body.map((e) => Faq.fromJson(e)).toList();
   }
 
   // build function
@@ -49,16 +64,17 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Center(
         // FutureBuilder
-        child: FutureBuilder<List<Post>>(
-          future: postsFuture,
+        child: FutureBuilder<List<Faq>>(
+          future: faqsFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               // until data is fetched, show loader
               return const CircularProgressIndicator();
             } else if (snapshot.hasData) {
-              // once data is fetched, display it on screen (call buildPosts())
-              final posts = snapshot.data!;
-              return buildPosts(posts);
+              // once data is fetched, display it on screen (call buildFaqs())
+              final list = snapshot.data!;
+              return buildFaqs(list);
+              // return buildPlants(list);
             } else {
               // if no data, show simple Text
               return const Text("No data available");
@@ -70,12 +86,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // function to display fetched data on screen
-  Widget buildPosts(List<Post> posts) {
+  Widget buildPlants(List<Plant> list) {
     // ListView Builder to show data in a list
     return ListView.builder(
-      itemCount: posts.length,
+      itemCount: list.length,
       itemBuilder: (context, index) {
-        final post = posts[index];
+        final item = list[index];
         return Container(
           color: Colors.grey.shade300,
           margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
@@ -84,9 +100,34 @@ class _MyHomePageState extends State<MyHomePage> {
           width: double.maxFinite,
           child: Row(
             children: [
-              Expanded(flex: 1, child: Image.network(post.thumbnail!)),
+              Expanded(flex: 1, child: Image.network(item.thumbnail!)),
               SizedBox(width: 10),
-              Expanded(flex: 3, child: Text(post.name!)),
+              Expanded(flex: 3, child: Text(item.name!)),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // function to display fetched data on screen
+  Widget buildFaqs(List<Faq> faqs) {
+    // ListView Builder to show data in a list
+    return ListView.builder(
+      itemCount: faqs.length,
+      itemBuilder: (context, index) {
+        final item = faqs[index];
+        return Container(
+          color: Colors.grey.shade300,
+          margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+          height: 100,
+          width: double.maxFinite,
+          child: Row(
+            children: [
+              Expanded(flex: 1, child: Image.network(item.thumbnail?.isEmpty == false ? item.thumbnail! : defaultThumbnail!)),
+              SizedBox(width: 10),
+              Expanded(flex: 3, child: Text(item.question!)),
             ],
           ),
         );
