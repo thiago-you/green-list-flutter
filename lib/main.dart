@@ -33,12 +33,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // variable to call and store future list of posts
   Future<List<Post>> postsFuture = getPosts();
+  static String? auth = "sk-B8oH6608468daafa24915";
 
   // function to fetch data from api and return future list of posts
   static Future<List<Post>> getPosts() async {
-    var url = Uri.parse("https://jsonplaceholder.typicode.com/albums/1/photos");
+    var url = Uri.parse("https://perenual.com/api/species-list?key=$auth");
     final response = await http.get(url, headers: {"Content-Type": "application/json"});
-    final List body = json.decode(response.body);
+    final List<dynamic> body = json.decode(response.body)["data"];
     return body.map((e) => Post.fromJson(e)).toList();
   }
 
@@ -83,9 +84,9 @@ class _MyHomePageState extends State<MyHomePage> {
           width: double.maxFinite,
           child: Row(
             children: [
-              Expanded(flex: 1, child: Image.network(post.url!)),
+              Expanded(flex: 1, child: Image.network(post.thumbnail!)),
               SizedBox(width: 10),
-              Expanded(flex: 3, child: Text(post.title!)),
+              Expanded(flex: 3, child: Text(post.name!)),
             ],
           ),
         );
