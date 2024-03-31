@@ -210,6 +210,7 @@ class _PlantsPageState extends State<PlantsPage> {
 
   // API key
   static String? auth = "sk-B8oH6608468daafa24915";
+  static String? defaultThumbnail = "https://perenual.com/storage/article_faq/faq_13Y7nX6435fb7c71c37/medium.jpg";
 
   Future<List<Plant>> plantsFuture = getPlants();
 
@@ -271,7 +272,7 @@ class _PlantsPageState extends State<PlantsPage> {
             width: double.maxFinite,
             child: Row(
               children: [
-                Expanded(flex: 1, child: Image.network(item.thumbnail!)),
+                Expanded(flex: 1, child: Image.network(item.thumbnail?.isEmpty == false ? item.thumbnail! : defaultThumbnail!)),
                 SizedBox(width: 10),
                 Expanded(flex: 3, child: Text(item.name!)),
               ],
