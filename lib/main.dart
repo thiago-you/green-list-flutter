@@ -78,56 +78,65 @@ class _MyHomePageState extends State<MyHomePage> {
         titleTextStyle: const TextStyle(fontSize: 30.0, color: Colors.white, fontWeight: FontWeight.bold),
         backgroundColor: Color(0xff1bbfa0),
       ),
-      body: Center(
-        // FutureBuilder
-        child: Row (
-          children: <Widget> [
-            Expanded(
-              child: Center (
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const FaqPage()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      elevation: 12.0,
-                      backgroundColor: Colors.green,
-                      padding: const EdgeInsets.all(24.0),
-                      textStyle: const TextStyle(fontSize: 22.0)
-                  ),
-                  child: const Text(
-                    'Open Faq',
-                    style: TextStyle(color: Colors.white, fontSize: 22.0), // Set text color and size here
-                  ),
-                ),
-              )
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/plant_background.png"),
+                fit: BoxFit.cover,
+              ),
             ),
-            Expanded(
-              child: Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const PlantsPage()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      elevation: 12.0,
-                      backgroundColor: Colors.green,
-                      padding: const EdgeInsets.all(24.0),
-                      textStyle: const TextStyle(fontSize: 22.0)
+          ),
+          Row (
+            children: <Widget> [
+              Expanded(
+                child: Center (
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const FaqPage()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                        elevation: 12.0,
+                        backgroundColor: Colors.green,
+                        padding: const EdgeInsets.all(24.0),
+                        textStyle: const TextStyle(fontSize: 22.0)
+                    ),
+                    child: const Text(
+                      'Open Faq',
+                      style: TextStyle(color: Colors.white, fontSize: 22.0), // Set text color and size here
+                    ),
                   ),
-                  child: const Text(
-                    'List Plants',
-                    style: TextStyle(color: Colors.white, fontSize: 22.0), // Set text color and size here
+                )
+              ),
+              Expanded(
+                child: Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const PlantsPage()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                        elevation: 12.0,
+                        backgroundColor: Colors.green,
+                        padding: const EdgeInsets.all(24.0),
+                        textStyle: const TextStyle(fontSize: 22.0)
+                    ),
+                    child: const Text(
+                      'List Plants',
+                      style: TextStyle(color: Colors.white, fontSize: 22.0), // Set text color and size here
+                    ),
                   ),
-                ),
+                )
               )
-            )
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }
