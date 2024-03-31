@@ -16,6 +16,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Green Life Guide',
+      theme: ThemeData(scaffoldBackgroundColor: Color(0xff1bbfa0),),
       home: const MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
@@ -73,6 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Green Life Guide'),
+        titleTextStyle: const TextStyle(fontSize: 30.0, color: Colors.white, fontWeight: FontWeight.bold),
+        backgroundColor: Color(0xff1bbfa0),
       ),
       body: Center(
         // FutureBuilder
@@ -151,6 +155,8 @@ class _FaqPageState extends State<FaqPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Green FAQ'),
+        titleTextStyle: const TextStyle(fontSize: 30.0, color: Colors.white, fontWeight: FontWeight.bold),
+        backgroundColor: Color(0xff1bbfa0),
       ),
       body: Center(
         child: FutureBuilder<List<Faq>>(
@@ -188,10 +194,18 @@ class _FaqPageState extends State<FaqPage> {
             );
           },
           child: Ink(
-            color: Colors.grey.shade300,
             padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
             height: 100,
             width: double.maxFinite,
+            decoration: BoxDecoration(
+              color: Color(0xff30e1be),
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.white,
+                  width: 2.0,
+                ),
+              ),
+            ),
             child: Row(
               children: [
                 Expanded(flex: 1, child: Image.network(item.thumbnail?.isEmpty == false ? item.thumbnail! : defaultThumbnail!)),
@@ -229,6 +243,8 @@ class _PlantsPageState extends State<PlantsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Plants List'),
+        titleTextStyle: const TextStyle(fontSize: 30.0, color: Colors.white, fontWeight: FontWeight.bold),
+        backgroundColor: Color(0xff1bbfa0),
       ),
       body: Center(
         child: FutureBuilder<List<Plant>>(
@@ -266,10 +282,18 @@ class _PlantsPageState extends State<PlantsPage> {
             );
           },
           child: Ink(
-            color: Colors.grey.shade300,
             padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
             height: 100,
             width: double.maxFinite,
+            decoration: BoxDecoration(
+              color: Color(0xff30e1be),
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.white,
+                  width: 2.0,
+                ),
+              ),
+            ),
             child: Row(
               children: [
                 Expanded(flex: 1, child: Image.network(item.thumbnail?.isEmpty == false ? item.thumbnail! : defaultThumbnail!)),
@@ -293,14 +317,16 @@ class _FaqItemPageState extends State<FaqItemPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Green FAQ Item"),
+        title: const Text("FAQ Item"),
+        titleTextStyle: const TextStyle(fontSize: 30.0, color: Colors.white, fontWeight: FontWeight.bold),
+        backgroundColor: Color(0xff1bbfa0),
       ),
       body: Center(
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: Column (
             children: <Widget> [
-              Expanded(flex: 1, child: Image.network(widget.faq?.image! ?? defaultImage!)),
+              Expanded(flex: 1, child: Image.network(widget.faq.image?.isEmpty == false ? widget.faq.image! : defaultImage!)),
               Expanded(flex: 1, child: Container(
                 margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: Column (
@@ -330,14 +356,16 @@ class _PlantItemPageState extends State<PlantItemPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Green Plant Item"),
+        title: const Text("Plant Item"),
+        titleTextStyle: const TextStyle(fontSize: 30.0, color: Colors.white, fontWeight: FontWeight.bold),
+        backgroundColor: Color(0xff1bbfa0),
       ),
       body: Center(
           child: Container(
             margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: Column (
               children: <Widget> [
-                Expanded(flex: 1, child: Image.network(widget.item?.image! ?? defaultImage!)),
+                Expanded(flex: 1, child: Image.network(widget.item.image?.isEmpty == false ? widget.item.image! : defaultImage!)),
                 Expanded(flex: 1, child: Container(
                     margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                     child: Column (
