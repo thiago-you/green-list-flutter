@@ -45,6 +45,24 @@ class PlantsPage extends StatefulWidget {
   State<PlantsPage> createState() => _PlantsPageState();
 }
 
+class FaqItemPage extends StatefulWidget {
+  var faq;
+
+  FaqItemPage({super.key, this.faq});
+
+  @override
+  State<FaqItemPage> createState() => _FaqItemPageState();
+}
+
+class PlantItemPage extends StatefulWidget {
+  var item;
+
+  PlantItemPage({super.key, this.item});
+
+  @override
+  State<PlantItemPage> createState() => _PlantItemPageState();
+}
+
 // homepage state
 class _MyHomePageState extends State<MyHomePage> {
 
@@ -87,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const FaqPage()),
+                      MaterialPageRoute(builder: (context) => const PlantsPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -161,19 +179,26 @@ class _FaqPageState extends State<FaqPage> {
       itemCount: faqs.length,
       itemBuilder: (context, index) {
         final item = faqs[index];
-        return Container(
-          color: Colors.grey.shade300,
-          margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-          height: 100,
-          width: double.maxFinite,
-          child: Row(
-            children: [
-              Expanded(flex: 1, child: Image.network(item.thumbnail?.isEmpty == false ? item.thumbnail! : defaultThumbnail!)),
-              SizedBox(width: 10),
-              Expanded(flex: 3, child: Text(item.question!)),
-            ],
-          ),
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FaqItemPage(faq: item)),
+            );
+          },
+          child: Ink(
+            color: Colors.grey.shade300,
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            height: 100,
+            width: double.maxFinite,
+            child: Row(
+              children: [
+                Expanded(flex: 1, child: Image.network(item.thumbnail?.isEmpty == false ? item.thumbnail! : defaultThumbnail!)),
+                SizedBox(width: 10),
+                Expanded(flex: 3, child: Text(item.question!)),
+              ],
+            ),
+        )
         );
       },
     );
@@ -229,21 +254,131 @@ class _PlantsPageState extends State<PlantsPage> {
       itemCount: list.length,
       itemBuilder: (context, index) {
         final item = list[index];
-        return Container(
-          color: Colors.grey.shade300,
-          margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-          height: 100,
-          width: double.maxFinite,
-          child: Row(
-            children: [
-              Expanded(flex: 1, child: Image.network(item.thumbnail!)),
-              SizedBox(width: 10),
-              Expanded(flex: 3, child: Text(item.name!)),
-            ],
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PlantItemPage(item: item)),
+            );
+          },
+          child: Ink(
+            color: Colors.grey.shade300,
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            height: 100,
+            width: double.maxFinite,
+            child: Row(
+              children: [
+                Expanded(flex: 1, child: Image.network(item.thumbnail!)),
+                SizedBox(width: 10),
+                Expanded(flex: 3, child: Text(item.name!)),
+              ],
+            )
           ),
         );
       },
+    );
+  }
+}
+
+class _FaqItemPageState extends State<FaqItemPage> {
+
+  // API key
+  static String? defaultImage = "https://perenual.com/storage/article_faq/faq_13Y7nX6435fb7c71c37/medium.jpg";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Green FAQ Item"),
+      ),
+      body: Center(
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: Column (
+            children: <Widget> [
+              Expanded(flex: 1, child: Image.network(widget.faq?.image! ?? defaultImage!)),
+              Expanded(flex: 1, child: Container(
+                margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                child: Column (
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                      child: Text(widget.faq?.question ?? "", style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+                    ),
+                    Text(widget.faq?.answer ?? "", style: const TextStyle(fontSize: 16.0)),
+                  ]
+                )
+              ))
+            ],
+          ),
+        )
+      ),
+    );
+  }
+}
+
+class _PlantItemPageState extends State<PlantItemPage> {
+
+  // API key
+  static String? defaultImage = "https://perenual.com/storage/article_faq/faq_13Y7nX6435fb7c71c37/medium.jpg";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Green Plant Item"),
+      ),
+      body: Center(
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Column (
+              children: <Widget> [
+                Expanded(flex: 1, child: Image.network(widget.item?.image! ?? defaultImage!)),
+                Expanded(flex: 1, child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    child: Column (
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                            child: Text(widget.item?.name ?? "", style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+                          ),
+                          Row(
+                              children: [
+                                Text("Scientific Name: ", style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                                Text(widget.item?.scientificName ?? "", style: const TextStyle(fontSize: 16.0))
+                              ],
+                          ),
+                          Row(
+                            children: [
+                              Text("Othem Name: ", style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                              Text(widget.item?.otherName ?? "", style: const TextStyle(fontSize: 16.0))
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("Cycle: ", style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                              Text(widget.item?.cycle ?? "", style: const TextStyle(fontSize: 16.0))
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("Watering: ", style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                              Text(widget.item?.watering ?? "", style: const TextStyle(fontSize: 16.0))
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("Sunlight: ", style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                              Text(widget.item?.sunlight ?? "", style: const TextStyle(fontSize: 16.0))
+                            ],
+                          ),
+                        ]
+                    )
+                ))
+              ],
+            ),
+          )
+      ),
     );
   }
 }
