@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:greenlist/faq.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -214,7 +215,9 @@ class _PlantsPageState extends State<PlantsPage> {
 
   // function to fetch data from api and return future list of plants
   static Future<List<Plant>> getPlants() async {
-    var url = Uri.parse("https://perenual.com/api/species-list?key=$auth");
+    var page = Random().nextInt(10);
+
+    var url = Uri.parse("https://perenual.com/api/species-list?key=$auth&page=$page");
     final response = await http.get(url, headers: {"Content-Type": "application/json"});
     final List<dynamic> body = json.decode(response.body)["data"];
     return body.map((e) => Plant.fromJson(e)).toList();
