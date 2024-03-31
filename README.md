@@ -1,16 +1,10 @@
-# greenlist
+# Flutter - PUCPR 2023
+Green Life Guide - App híbrido para listagem de plantas e FAQ sobre plantas e meio ambiente para o projeto da PÓS PUCPR utilizando Flutter.
 
-A green list app.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Interface
+<p align="center" width="100%">
+ <img src="https://github.com/thiago-you/green-list-flutter/assets/23344256/ab7fd344-bc60-40d9-9dcd-1da675a7e35a" width="350"/>
+ <img src="https://github.com/thiago-you/green-list-flutter/assets/23344256/b522db08-f122-4891-838d-c7bdbdf5d5d8" width="350"/>
+ <img src="https://github.com/thiago-you/green-list-flutter/assets/23344256/e15a21b9-26e0-42b1-b903-90352104f686" width="350"/>
+ <img src="https://github.com/thiago-you/green-list-flutter/assets/23344256/3fe765c6-ccbb-4bc6-bc54-7e4fd75025fe" width="350"/>
+</p>
