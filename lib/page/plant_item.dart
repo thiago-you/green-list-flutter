@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greenlist/components/page_banner.dart';
 import 'package:greenlist/data/model/plant.dart';
-
 import '../components/page_title.dart';
 import '../components/custom_appbar.dart';
 

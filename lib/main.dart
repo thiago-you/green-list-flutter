@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greenlist/components/custom_appbar.dart';
 import 'package:greenlist/components/route_button.dart';
+import 'data/enum/page_type_enum.dart';
 
 void main() {
   runApp(const MyApp());

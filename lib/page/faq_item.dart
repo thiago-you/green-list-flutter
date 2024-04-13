@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../components/page_banner.dart';
 import '../components/page_title.dart';
 import '../components/custom_appbar.dart';

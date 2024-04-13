@@ -5,6 +5,7 @@ import 'package:greenlist/components/route_button.dart';
 import 'package:greenlist/data/model/faq.dart';
 import 'package:greenlist/data/repository/api.dart';
 
+import '../data/enum/page_type_enum.dart';
 import '../data/model/plant.dart';
 import '../page/faq_item.dart';
 import '../page/plant_item.dart';

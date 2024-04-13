@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/custom_appbar.dart';
 import '../components/page_future_builder.dart';
-import '../components/route_button.dart';
+import '../data/enum/page_type_enum.dart';
 
 class FaqListPage extends StatefulWidget {
   const FaqListPage({super.key});
