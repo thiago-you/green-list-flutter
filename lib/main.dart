@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:greenlist/page/faq_list.dart';
-import 'package:greenlist/page/plant_list.dart';
+import 'package:greenlist/components/custom_appbar.dart';
+import 'package:greenlist/components/route_button.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Green Life Guide',
-      theme: ThemeData(scaffoldBackgroundColor: const Color(0xff1bbfa0),),
+      theme: ThemeData(scaffoldBackgroundColor: const Color(0xff18c091),),
       home: const MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
@@ -29,15 +29,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  // build function
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Green Life Guide'),
-        titleTextStyle: const TextStyle(fontSize: 30.0, color: Colors.white, fontWeight: FontWeight.bold),
-        backgroundColor: const Color(0xff1bbfa0),
-      ),
+      appBar: const CustomAppbar(title: "Green Life Guide"),
       body: Stack(
         children: [
           Container(
@@ -48,52 +43,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          Row (
+          const Column (
             children: <Widget> [
-              Expanded(
-                child: Center (
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const FaqListPage()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                        elevation: 12.0,
-                        backgroundColor: Colors.green,
-                        padding: const EdgeInsets.all(24.0),
-                        textStyle: const TextStyle(fontSize: 22.0)
-                    ),
-                    child: const Text(
-                      'Open Faq',
-                      style: TextStyle(color: Colors.white, fontSize: 22.0), // Set text color and size here
-                    ),
-                  ),
-                )
-              ),
-              Expanded(
-                child: Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const PlantListPage()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                        elevation: 12.0,
-                        backgroundColor: Colors.green,
-                        padding: const EdgeInsets.all(24.0),
-                        textStyle: const TextStyle(fontSize: 22.0)
-                    ),
-                    child: const Text(
-                      'List Plants',
-                      style: TextStyle(color: Colors.white, fontSize: 22.0), // Set text color and size here
-                    ),
-                  ),
-                )
-              )
+              Spacer(),
+              RouteButton(label: 'Open FAQ', type: PageType.faq),
+              RouteButton(label: 'List Plants', type: PageType.plant),
+              Spacer(),
             ],
           ),
         ],

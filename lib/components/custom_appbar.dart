@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;
   final Widget? leading;
   final PreferredSizeWidget? bottom;
 
-  const CustomAppBar({
+  const CustomAppbar({
     super.key,
     required this.title,
     this.actions,
@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(title),
       titleTextStyle: const TextStyle(fontSize: 30.0, color: Colors.white, fontWeight: FontWeight.bold),
-      backgroundColor: const Color(0xff1bbfa0),
+      backgroundColor: const Color(0xff18c091),
       scrolledUnderElevation: 0.0,
       actions: actions,
       leading: leading,

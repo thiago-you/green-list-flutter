@@ -1,7 +1,7 @@
 import 'package:greenlist/data/model/faq.dart';
 import 'package:greenlist/data/repository/api.dart';
 import 'package:flutter/material.dart';
-import '../components/page_toolbar.dart';
+import '../components/custom_appbar.dart';
 import 'faq_item.dart';
 
 class FaqListPage extends StatefulWidget {
@@ -18,7 +18,7 @@ class _FaqListPageState extends State<FaqListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "FAQ"),
+      appBar: const CustomAppbar(title: "FAQ"),
       body: Center(
         child: FutureBuilder<List<Faq>>(
           future: faqsFuture,

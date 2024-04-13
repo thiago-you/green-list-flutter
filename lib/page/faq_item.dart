@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../components/page_banner.dart';
 import '../components/page_title.dart';
-import '../components/page_toolbar.dart';
+import '../components/custom_appbar.dart';
 import '../data/model/faq.dart';
 
 class FaqItemPage extends StatefulWidget {
@@ -19,7 +19,7 @@ class _FaqItemPageState extends State<FaqItemPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "FAQ Item"),
+      appBar: const CustomAppbar(title: "FAQ Item"),
       body: Center(
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),

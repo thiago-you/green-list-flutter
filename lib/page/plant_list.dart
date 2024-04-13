@@ -1,7 +1,7 @@
 import 'package:greenlist/data/model/plant.dart';
 import 'package:greenlist/page/plant_item.dart';
 import 'package:flutter/material.dart';
-import '../components/page_toolbar.dart';
+import '../components/custom_appbar.dart';
 import '../data/repository/api.dart';
 
 class PlantListPage extends StatefulWidget {
@@ -18,7 +18,7 @@ class _PlantListPageState extends State<PlantListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Plants"),
+      appBar: const CustomAppbar(title: "Plants"),
       body: Center(
         child: FutureBuilder<List<Plant>>(
           future: plantsFuture,

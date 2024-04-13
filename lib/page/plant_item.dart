@@ -3,7 +3,7 @@ import 'package:greenlist/components/page_banner.dart';
 import 'package:greenlist/data/model/plant.dart';
 
 import '../components/page_title.dart';
-import '../components/page_toolbar.dart';
+import '../components/custom_appbar.dart';
 
 class PlantItemPage extends StatefulWidget {
   final Plant item;
@@ -19,7 +19,7 @@ class _PlantItemPageState extends State<PlantItemPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Plant Item"),
+      appBar: const CustomAppbar(title: "Plant Item"),
       body: Center(
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
