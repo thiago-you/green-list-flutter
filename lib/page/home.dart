@@ -3,6 +3,7 @@ import 'package:greenlist/components/custom_appbar.dart';
 import 'package:greenlist/components/route_button.dart';
 
 import '../data/enum/page_type_enum.dart';
+import '../data/repository/assets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/plant_background.png"),
+                image: AssetImage(Assets.background),
                 fit: BoxFit.cover,
               ),
             ),

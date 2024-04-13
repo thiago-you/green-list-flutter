@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:greenlist/data/repository/assets.dart';
 import 'package:lottie/lottie.dart';
-
 import 'home.dart';
 
 class SplashPage extends StatefulWidget {
@@ -30,8 +30,14 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-          child: Lottie.asset("assets/animations/anim_plant_1.json"),
+          child: Lottie.asset(Assets.animation),
         )
     );
+  }
+
+  @override
+  void didChangeDependencies() {
+    precacheImage(const AssetImage(Assets.background), context);
+    super.didChangeDependencies();
   }
 }
