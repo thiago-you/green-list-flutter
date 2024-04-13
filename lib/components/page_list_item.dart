@@ -3,8 +3,8 @@ import 'package:greenlist/components/page_banner.dart';
 import 'package:greenlist/data/model/faq.dart';
 import '../data/enum/page_type_enum.dart';
 import '../data/model/plant.dart';
-import '../page/faq/faq_item.dart';
-import '../page/plant/plant_item.dart';
+import '../views/faq/faq_item.dart';
+import '../views/plant/plant_item.dart';
 
 class PageListItem extends StatelessWidget {
   final String? thumbnail;

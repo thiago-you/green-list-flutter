@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:greenlist/components/page_banner.dart';
 import 'package:greenlist/components/page_list_item.dart';
-import 'package:greenlist/components/route_button.dart';
 import 'package:greenlist/data/model/faq.dart';
 import 'package:greenlist/data/repository/api.dart';
 
 import '../data/enum/page_type_enum.dart';
 import '../data/model/plant.dart';
-import '../page/faq/faq_item.dart';
-import '../page/plant/plant_item.dart';
 
 class PageFutureBuilder extends StatefulWidget {
   final PageType pageType;
@@ -35,7 +31,7 @@ class _PageFutureBuilderState extends State<PageFutureBuilder> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
           } else if (snapshot.hasData) {
-            return buildList(widget.pageType, snapshot.data!);
+            return _buildListItem(widget.pageType, snapshot.data!);
           } else {
             return const Text("No data available! Please, try again later.");
           }
@@ -44,20 +40,20 @@ class _PageFutureBuilderState extends State<PageFutureBuilder> {
     );
   }
 
-  Widget buildList(PageType pageType, List<Object> list) {
+  Widget _buildListItem(PageType pageType, List<Object> list) {
     return ListView.builder(
       itemCount: list.length,
       itemBuilder: (context, index) {
         final item = list[index];
 
         return pageType == PageType.faq
-            ? getFaqPageListItem(item as Faq)
-            : getPlantPageListItem(item as Plant);
+            ? _getFaqPageListItem(item as Faq)
+            : _getPlantPageListItem(item as Plant);
       },
     );
   }
 
-  PageListItem getPlantPageListItem(Plant item) {
+  PageListItem _getPlantPageListItem(Plant item) {
     return PageListItem(
       thumbnail: item.thumbnail,
       description: item.name,
@@ -66,7 +62,7 @@ class _PageFutureBuilderState extends State<PageFutureBuilder> {
     );
   }
 
-  PageListItem getFaqPageListItem(Faq item) {
+  PageListItem _getFaqPageListItem(Faq item) {
     return PageListItem(
         thumbnail: item.thumbnail,
         description: item.question,

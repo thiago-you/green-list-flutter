@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/enum/page_type_enum.dart';
-import '../page/faq/faq_list.dart';
-import '../page/plant/plant_list.dart';
+import '../views/faq/faq_list.dart';
+import '../views/plant/plant_list.dart';
 
 class RouteButton extends StatelessWidget {
   final String label;
@@ -33,7 +33,7 @@ class RouteButton extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  backgroundColor: const Color(0xe5ffffff),
+                  backgroundColor: Colors.white,
                   padding: const EdgeInsets.all(24.0),
                   textStyle: const TextStyle(fontSize: 22.0)
               ),
@@ -43,14 +43,14 @@ class RouteButton extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 15.0),
                     child: Icon(
                       type == PageType.faq ? Icons.contact_support : Icons.compost_sharp,
-                      color: Colors.blueGrey,
+                      color: const Color(0xe52f2f2f),
                       size: 60.0,
                     ),
                   ),
                   Text(
                     label,
                     style: const TextStyle(
-                      color: Colors.blueGrey,
+                      color: Color(0xe52f2f2f),
                       fontSize: 22.0
                     ),
                   ),

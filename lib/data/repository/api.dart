@@ -22,7 +22,7 @@ class Api {
   static Future<List<Plant>> getPlantList() async {
     var page = Random().nextInt(10);
 
-    var url = Uri.parse("https://perenual.com/api/species-list?key=$auth&page=$page");
+    var url = Uri.parse("https://perenual.com/api/species-list?key=$auth&views=$page");
 
     final response = await http.get(url, headers: {"Content-Type": "application/json"});
     final List<dynamic> body = json.decode(response.body)["data"];
