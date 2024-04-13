@@ -33,7 +33,7 @@ class RouteButton extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  backgroundColor: const Color(0xe520a6d0),
+                  backgroundColor: const Color(0xdafffff0),
                   padding: const EdgeInsets.all(24.0),
                   textStyle: const TextStyle(fontSize: 22.0)
               ),
@@ -43,14 +43,14 @@ class RouteButton extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 15.0),
                     child: Icon(
                       type == PageType.faq ? Icons.contact_support : Icons.compost_sharp,
-                      color: Colors.white,
+                      color: Colors.blueGrey,
                       size: 60.0,
                     ),
                   ),
                   Text(
                     label,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: Colors.blueGrey,
                       fontSize: 22.0
                     ),
                   ),
