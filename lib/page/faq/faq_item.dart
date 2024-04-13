@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../components/page_banner.dart';
-import '../components/page_title.dart';
-import '../components/custom_appbar.dart';
-import '../data/model/faq.dart';
+import '../../components/page_banner.dart';
+import '../../components/page_title.dart';
+import '../../components/custom_appbar.dart';
+import '../../data/model/faq.dart';
 
 class FaqItemPage extends StatefulWidget {
   final Faq item;
@@ -19,7 +19,7 @@ class _FaqItemPageState extends State<FaqItemPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffe3e3e3),
-      appBar: const CustomAppbar(title: "FAQ Item"),
+      appBar: const CustomAppbar(title: "Question"),
       body: Center(
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),

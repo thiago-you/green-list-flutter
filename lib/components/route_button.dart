@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/enum/page_type_enum.dart';
-import '../page/faq_list.dart';
-import '../page/plant_list.dart';
+import '../page/faq/faq_list.dart';
+import '../page/plant/plant_list.dart';
 
 class RouteButton extends StatelessWidget {
   final String label;

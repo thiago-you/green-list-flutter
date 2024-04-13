@@ -7,8 +7,8 @@ import 'package:greenlist/data/repository/api.dart';
 
 import '../data/enum/page_type_enum.dart';
 import '../data/model/plant.dart';
-import '../page/faq_item.dart';
-import '../page/plant_item.dart';
+import '../page/faq/faq_item.dart';
+import '../page/plant/plant_item.dart';
 
 class PageFutureBuilder extends StatefulWidget {
   final PageType pageType;

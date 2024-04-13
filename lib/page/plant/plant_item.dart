@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:greenlist/components/page_banner.dart';
 import 'package:greenlist/data/model/plant.dart';
-import '../components/page_title.dart';
-import '../components/custom_appbar.dart';
+import '../../components/page_title.dart';
+import '../../components/custom_appbar.dart';
 
 class PlantItemPage extends StatefulWidget {
   final Plant item;
@@ -20,7 +20,7 @@ class _PlantItemPageState extends State<PlantItemPage> {
     return Scaffold(
       backgroundColor: const Color(0xffe3e3e3),
       appBar: const CustomAppbar(
-        title: "Plant Item",
+        title: "Plant Info",
         actions: <Widget>[BookmarkButton()],
       ),
       body: Center(

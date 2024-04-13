@@ -1,7 +1,7 @@
 import 'package:greenlist/components/page_future_builder.dart';
 import 'package:flutter/material.dart';
-import '../components/custom_appbar.dart';
-import '../data/enum/page_type_enum.dart';
+import '../../components/custom_appbar.dart';
+import '../../data/enum/page_type_enum.dart';
 
 class PlantListPage extends StatefulWidget {
   const PlantListPage({super.key});
