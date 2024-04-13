@@ -33,7 +33,7 @@ class RouteButton extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  backgroundColor: const Color(0xdafffff0),
+                  backgroundColor: const Color(0xe5ffffff),
                   padding: const EdgeInsets.all(24.0),
                   textStyle: const TextStyle(fontSize: 22.0)
               ),
