@@ -19,13 +19,17 @@ class _PlantItemPageState extends State<PlantItemPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppbar(title: "Plant Item"),
+      backgroundColor: const Color(0xffe3e3e3),
+      appBar: const CustomAppbar(
+        title: "Plant Item",
+        actions: <Widget>[BookmarkButton()],
+      ),
       body: Center(
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: Column(
             children: <Widget> [
-              PageBanner(image: widget.item.image),
+              PageImage(image: widget.item.image),
               Expanded(flex: 2, child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
                   child: SingleChildScrollView(
@@ -64,6 +68,24 @@ class InfoRow extends StatelessWidget {
           child: Text(value ?? "", style: const TextStyle(fontSize: 16.0)),
         ),
       ],
+    );
+  }
+}
+
+class BookmarkButton extends StatelessWidget {
+
+  const BookmarkButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(
+        Icons.bookmark_add,
+        color: Colors.white,
+      ),
+      onPressed: () {
+        // Add bookmark
+      },
     );
   }
 }

@@ -19,13 +19,14 @@ class _FaqItemPageState extends State<FaqItemPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffe3e3e3),
       appBar: const CustomAppbar(title: "FAQ Item"),
       body: Center(
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: Column(
             children: <Widget> [
-              PageBanner(image: widget.item.image),
+              PageImage(image: widget.item.image),
               Expanded(flex: 2, child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: SingleChildScrollView(
