@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:greenlist/components/page_banner.dart';
+import 'package:greenlist/data/model/plant.dart';
 
 import '../components/page_title.dart';
 import '../components/page_toolbar.dart';
 
 class PlantItemPage extends StatefulWidget {
-  final item;
+  final Plant item;
 
-  const PlantItemPage({super.key, this.item});
+  const PlantItemPage({super.key, required this.item});
 
   @override
   State<PlantItemPage> createState() => _PlantItemPageState();
@@ -30,12 +31,12 @@ class _PlantItemPageState extends State<PlantItemPage> {
                   child: SingleChildScrollView(
                     child: Column (
                       children: [
-                        PageTitle(title: widget.item?.name),
-                        InfoRow(label: "Scientific Name", value: widget.item?.scientificName),
-                        InfoRow(label: "Other Name", value: widget.item?.otherName),
-                        InfoRow(label: "Cycle", value: widget.item?.cycle),
-                        InfoRow(label: "Watering", value: widget.item?.watering),
-                        InfoRow(label: "Sunlight", value: widget.item?.sunlight),
+                        PageTitle(title: widget.item.name),
+                        InfoRow(label: "Scientific Name", value: widget.item.scientificName),
+                        InfoRow(label: "Other Name", value: widget.item.otherName),
+                        InfoRow(label: "Cycle", value: widget.item.cycle),
+                        InfoRow(label: "Watering", value: widget.item.watering),
+                        InfoRow(label: "Sunlight", value: widget.item.sunlight),
                       ]
                     )
                   )

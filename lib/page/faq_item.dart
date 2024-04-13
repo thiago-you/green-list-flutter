@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import '../components/page_banner.dart';
 import '../components/page_title.dart';
 import '../components/page_toolbar.dart';
+import '../data/model/faq.dart';
 
 class FaqItemPage extends StatefulWidget {
-  final faq;
+  final Faq item;
 
-  const FaqItemPage({super.key, this.faq});
+  const FaqItemPage({super.key, required this.item});
 
   @override
   State<FaqItemPage> createState() => _FaqItemPageState();
@@ -24,14 +25,14 @@ class _FaqItemPageState extends State<FaqItemPage> {
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: Column(
             children: <Widget> [
-              PageBanner(image: widget.faq.image),
+              PageBanner(image: widget.item.image),
               Expanded(flex: 2, child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: SingleChildScrollView(
                   child: Column(
                       children: [
-                        PageTitle(title: widget.faq?.question),
-                        Text(widget.faq?.answer ?? "", style: const TextStyle(fontSize: 16.0)),
+                        PageTitle(title: widget.item.question),
+                        Text(widget.item.answer ?? "", style: const TextStyle(fontSize: 16.0)),
                       ]
                   )
                 )
