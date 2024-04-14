@@ -22,10 +22,6 @@ class PageFutureBuilder extends StatefulWidget {
 }
 
 class _PageFutureBuilderState extends State<PageFutureBuilder> {
-  Future<List<Faq>> faqListFuture = Api.getFaqList();
-  Future<List<Plant>> plantListFuture = Api.getPlantList();
-  Future<List<Plant>> bookmarkListFuture = LocalDatabase().plants();
-
   bool hasChanged = false;
 
   Future<List<Object>>? getItemList() {
@@ -33,11 +29,11 @@ class _PageFutureBuilderState extends State<PageFutureBuilder> {
 
     Future<List<Object>>? future;
     if (widget.pageType == PageType.faq) {
-      future = faqListFuture;
+      future = Api.getFaqList();
     } else if (widget.pageType == PageType.plant) {
-      future = plantListFuture;
+      future = Api.getPlantList();
     } else {
-      future = bookmarkListFuture;
+      future = LocalDatabase().plants();
     }
 
     return future;
@@ -56,7 +52,7 @@ class _PageFutureBuilderState extends State<PageFutureBuilder> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
-          } else if (snapshot.hasData) {
+          } else if (snapshot.hasData && snapshot.data?.isNotEmpty == true) {
             return _buildListItem(widget.pageType, snapshot.data!);
           } else {
             return const Text("No data available! Please, try again later.");
