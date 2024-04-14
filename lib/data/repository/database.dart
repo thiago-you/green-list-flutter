@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart' show join;
@@ -49,7 +50,7 @@ class LocalDatabase {
 
     final List<Map<String, Object?>> list = await db.query('plants');
 
-    return [
+    List<Plant> plantsList = [
       for (final {
       'id': id as int?,
       'name': name as String?,
@@ -73,6 +74,13 @@ class LocalDatabase {
           thumbnail: thumbnail,
         ),
     ];
+
+    if (plantsList.isEmpty) {
+      await insertRandomPlants(db);
+      return plants();
+    }
+
+    return plantsList;
   }
 
   Future<void> updatePlant(Plant item) async {
@@ -107,5 +115,41 @@ class LocalDatabase {
     );
 
     return result.isNotEmpty;
+  }
+
+  // Define a function to generate random plant information
+  Map<String, dynamic> generateRandomPlant() {
+    final Random random = Random();
+
+    List<String> names = ['PlantA', 'PlantB', 'PlantC', 'PlantD', 'PlantE'];
+    List<String> scientificNames = ['SciA', 'SciB', 'SciC', 'SciD', 'SciE'];
+    List<String> otherNames = ['OtherA', 'OtherB', 'OtherC', 'OtherD', 'OtherE'];
+    List<String> cycles = ['CycleA', 'CycleB', 'CycleC', 'CycleD', 'CycleE'];
+    List<String> waterings = ['WateringA', 'WateringB', 'WateringC', 'WateringD', 'WateringE'];
+    List<String> sunlight = ['SunlightA', 'SunlightB', 'SunlightC', 'SunlightD', 'SunlightE'];
+    List<String> images = ['ImageA', 'ImageB', 'ImageC', 'ImageD', 'ImageE'];
+    List<String> thumbnails = ['ThumbnailA', 'ThumbnailB', 'ThumbnailC', 'ThumbnailD', 'ThumbnailE'];
+
+    return {
+      'name': names[random.nextInt(names.length)],
+      'scientific_name': scientificNames[random.nextInt(scientificNames.length)],
+      'other_name': otherNames[random.nextInt(otherNames.length)],
+      'cycle': cycles[random.nextInt(cycles.length)],
+      'watering': waterings[random.nextInt(waterings.length)],
+      'sunlight': sunlight[random.nextInt(sunlight.length)],
+      'image': images[random.nextInt(images.length)],
+      'thumbnail': thumbnails[random.nextInt(thumbnails.length)],
+    };
+  }
+
+// Define a function to insert random plant data into the database
+  Future<void> insertRandomPlants(Database database) async {
+    final Batch batch = database.batch();
+
+    for (int i = 0; i < 3; i++) {
+      batch.insert('plants', generateRandomPlant());
+    }
+
+    await batch.commit();
   }
 }
