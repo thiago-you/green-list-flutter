@@ -14,9 +14,14 @@ class Api {
     var url = Uri.parse("https://perenual.com/api/article-faq-list?key=$auth");
 
     final response = await http.get(url, headers: {"Content-Type": "application/json"});
-    final List<dynamic> body = json.decode(response.body)["data"];
+    final dynamic decodedResponse = json.decode(response.body)["data"];
 
-    return body.map((e) => Faq.fromJson(e)).toList();
+    if (decodedResponse.containsKey('data')) {
+      final List<dynamic> body = decodedResponse["data"];
+      return body.map((e) => Faq.fromJson(e)).toList();
+    }
+
+    return [];
   }
 
   static Future<List<Plant>> getPlantList() async {
@@ -25,8 +30,13 @@ class Api {
     var url = Uri.parse("https://perenual.com/api/species-list?key=$auth&views=$page");
 
     final response = await http.get(url, headers: {"Content-Type": "application/json"});
-    final List<dynamic> body = json.decode(response.body)["data"];
+    final dynamic decodedResponse = json.decode(response.body)["data"];
 
-    return body.map((e) => Plant.fromJson(e)).toList();
+    if (decodedResponse.containsKey('data')) {
+      final List<dynamic> body = decodedResponse["data"];
+      return body.map((e) => Plant.fromJson(e)).toList();
+    }
+
+    return [];
   }
 }
