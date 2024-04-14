@@ -28,12 +28,21 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          const Column (
+          Column (
             children: <Widget> [
-              Spacer(),
-              RouteButton(label: 'Open FAQ', type: PageType.faq),
-              RouteButton(label: 'List Plants', type: PageType.plant),
-              Spacer(),
+              const Spacer(),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: const Row(
+                  children: [
+                    RouteButton(label: 'Open FAQ', pageType: PageType.faq),
+                    Spacer(),
+                    RouteButton(label: 'List Plants', pageType: PageType.plant),
+                  ],
+                )
+              ),
+              const RouteButton(label: 'Bookmarks', pageType: PageType.bookmark),
+              const Spacer(),
             ],
           ),
         ],

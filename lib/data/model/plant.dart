@@ -22,7 +22,7 @@ class Plant {
   });
 
   Plant.fromJson(Map<String, dynamic> json) {
-    id = json['title'];
+    id = json['id'];
     name = json['common_name'];
     scientificName = json['scientific_name'].isEmpty ? null : json['scientific_name'][0];
     otherName = json['other_name'].isEmpty ? null : json['other_name'][0];
@@ -31,6 +31,20 @@ class Plant {
     sunlight = json['sunlight'].isEmpty ? null : json['sunlight'][0];
     image = json['default_image']?['original_url'] ?? "";
     thumbnail = json['default_image']?['thumbnail'] ?? "";
+  }
+
+  Map<String, Object?> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'scientific_name': scientificName,
+      'other_name': otherName,
+      'cycle': cycle,
+      'watering': watering,
+      'sunlight': sunlight,
+      'image': image,
+      'thumbnail': thumbnail,
+    };
   }
 
   @override

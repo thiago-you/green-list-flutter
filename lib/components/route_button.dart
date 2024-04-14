@@ -1,13 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:greenlist/views/plant/plant_bookmark_list.dart';
 import '../data/enum/page_type_enum.dart';
 import '../views/faq/faq_list.dart';
 import '../views/plant/plant_list.dart';
 
 class RouteButton extends StatelessWidget {
   final String label;
-  final PageType type;
+  final PageType pageType;
 
-  const RouteButton({super.key, required this.label, required this.type});
+  const RouteButton({super.key, required this.label, required this.pageType});
+
+  StatefulWidget getPageWidget() {
+    if (pageType == PageType.faq) {
+      return const FaqListPage();
+    } else if (pageType == PageType.plant) {
+      return const PlantListPage();
+    } else {
+      return const BookmarkListPage();
+    }
+  }
+
+  IconData getIconType() {
+    if (pageType == PageType.faq) {
+      return Icons.contact_support;
+    } else if (pageType == PageType.plant) {
+      return Icons.compost_sharp;
+    } else {
+    return Icons.bookmarks;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +42,7 @@ class RouteButton extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => type == PageType.faq
-                          ? const FaqListPage()
-                          : const PlantListPage()
-                  ),
+                  MaterialPageRoute(builder: (context) => getPageWidget()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -42,8 +59,8 @@ class RouteButton extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(bottom: 15.0),
                     child: Icon(
-                      type == PageType.faq ? Icons.contact_support : Icons.compost_sharp,
-                      color: const Color(0xe52f2f2f),
+                      getIconType(),
+                      color: const Color(0xff18c091),
                       size: 60.0,
                     ),
                   ),
@@ -51,6 +68,7 @@ class RouteButton extends StatelessWidget {
                     label,
                     style: const TextStyle(
                       color: Color(0xe52f2f2f),
+                      fontWeight: FontWeight.bold,
                       fontSize: 22.0
                     ),
                   ),

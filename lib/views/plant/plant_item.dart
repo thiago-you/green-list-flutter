@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:greenlist/components/page_banner.dart';
 import 'package:greenlist/data/model/plant.dart';
+import '../../components/bookmark_button.dart';
+import '../../components/info_row.dart';
 import '../../components/page_title.dart';
 import '../../components/custom_appbar.dart';
 
@@ -15,13 +17,24 @@ class PlantItemPage extends StatefulWidget {
 
 class _PlantItemPageState extends State<PlantItemPage> {
 
+  bool isBookmarkChanged = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffe3e3e3),
-      appBar: const CustomAppbar(
+      appBar: CustomAppbar(
         title: "Plant Info",
-        actions: <Widget>[BookmarkButton()],
+        actions: <Widget>[
+          BookmarkButton(
+            item: widget.item,
+            onBookmarkStateChange: (changed) {
+              setState(() {
+                isBookmarkChanged = changed;
+              });
+            },
+          )
+        ],
       ),
       body: Center(
         child: Container(
@@ -48,43 +61,6 @@ class _PlantItemPageState extends State<PlantItemPage> {
           ),
         )
       ),
-    );
-  }
-}
-
-class InfoRow extends StatelessWidget {
-  final String label;
-  final String? value;
-
-  const InfoRow({super.key, required this.label, this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text("$label: ", style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
-        Flexible(
-          child: Text(value ?? "", style: const TextStyle(fontSize: 16.0)),
-        ),
-      ],
-    );
-  }
-}
-
-class BookmarkButton extends StatelessWidget {
-
-  const BookmarkButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(
-        Icons.bookmark_add,
-        color: Colors.white,
-      ),
-      onPressed: () {
-        // Add bookmark
-      },
     );
   }
 }
