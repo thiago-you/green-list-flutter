@@ -3,8 +3,8 @@ Green Life Guide - App híbrido para listagem de plantas e FAQ sobre plantas e m
 
 ### Interface
 <p align="center" width="100%">
- <img src="https://github.com/thiago-you/green-list-flutter/assets/23344256/ab7fd344-bc60-40d9-9dcd-1da675a7e35a" width="350"/>
- <img src="https://github.com/thiago-you/green-list-flutter/assets/23344256/b522db08-f122-4891-838d-c7bdbdf5d5d8" width="350"/>
- <img src="https://github.com/thiago-you/green-list-flutter/assets/23344256/e15a21b9-26e0-42b1-b903-90352104f686" width="350"/>
- <img src="https://github.com/thiago-you/green-list-flutter/assets/23344256/3fe765c6-ccbb-4bc6-bc54-7e4fd75025fe" width="350"/>
+ <img src="https://github.com/thiago-you/green-list-flutter/assets/23344256/e4a43fa4-4664-498d-bc9a-dd83d3835f90" width="350"/>
+ <img src="https://github.com/thiago-you/green-list-flutter/assets/23344256/e543bb24-f7b4-4b7f-9b0c-5020b6943c8f" width="350"/>
+ <img src="https://github.com/thiago-you/green-list-flutter/assets/23344256/48fc6680-dafd-467c-b828-f2c75fc0af6a6" width="350"/>
+ <img src="https://github.com/thiago-you/green-list-flutter/assets/23344256/b1b410ef-a4a3-4eb4-b7d9-461dac81ae77" width="350"/>
 </p>
