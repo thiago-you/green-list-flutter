@@ -17,7 +17,16 @@ class PlantItemPage extends StatefulWidget {
 
 class _PlantItemPageState extends State<PlantItemPage> {
 
-  bool isBookmarkChanged = false;
+  bool? isBookmarkChanged;
+
+  @override
+  void dispose() {
+    if (isBookmarkChanged != null) {
+      Navigator.pop(context, true);
+    }
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -11,14 +11,24 @@ class PageListItem extends StatelessWidget {
   final String? description;
   final PageType? pageType;
   final Object item;
+  final VoidCallback? refresh;
 
   const PageListItem({
     super.key,
     required this.thumbnail,
     required this.description,
     required this.pageType,
-    required this.item
+    required this.item,
+    this.refresh,
   });
+
+  StatefulWidget getPageWidget(Object item) {
+    if (pageType == PageType.faq) {
+      return FaqItemPage(item: item as Faq);
+    } else {
+      return PlantItemPage(item: item as Plant);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +36,12 @@ class PageListItem extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => pageType == PageType.faq
-              ? FaqItemPage(item: item as Faq)
-              : PlantItemPage(item: item as Plant)
-            )
-          );
+            MaterialPageRoute(builder: (context) => getPageWidget(item))
+          ).then((value) => {
+            if (pageType == PageType.bookmark) {
+              refresh?.call()
+            }
+          });
         },
         child: Container(
             margin: const EdgeInsets.only(bottom: 10.0, left: 10.0, right: 10.0, top: 5.0),

@@ -11,13 +11,19 @@ class BookmarkListPage extends StatefulWidget {
 }
 
 class _BookmarkListPageState extends State<BookmarkListPage> {
+  void refreshBookmarks() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xffe3e3e3),
-      appBar: CustomAppbar(title: "Bookmarks"),
-      body: PageFutureBuilder(pageType: PageType.bookmark),
+    return Scaffold(
+      backgroundColor: const Color(0xffe3e3e3),
+      appBar: const CustomAppbar(title: "Bookmarks"),
+      body: PageFutureBuilder(
+        pageType: PageType.bookmark,
+        onRefresh: refreshBookmarks,
+      ),
     );
   }
 }

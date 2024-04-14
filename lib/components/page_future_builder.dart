@@ -9,10 +9,12 @@ import '../data/model/plant.dart';
 
 class PageFutureBuilder extends StatefulWidget {
   final PageType pageType;
+  final VoidCallback? onRefresh;
 
   const PageFutureBuilder({
     super.key,
     required this.pageType,
+    this.onRefresh,
   });
 
   @override
@@ -24,7 +26,11 @@ class _PageFutureBuilderState extends State<PageFutureBuilder> {
   Future<List<Plant>> plantListFuture = Api.getPlantList();
   Future<List<Plant>> bookmarkListFuture = LocalDatabase().plants();
 
+  bool hasChanged = false;
+
   Future<List<Object>>? getItemList() {
+    hasChanged = false;
+
     Future<List<Object>>? future;
     if (widget.pageType == PageType.faq) {
       future = faqListFuture;
@@ -39,6 +45,11 @@ class _PageFutureBuilderState extends State<PageFutureBuilder> {
 
   @override
   Widget build(BuildContext context) {
+    if (hasChanged) {
+      getItemList();
+      widget.onRefresh?.call;
+    }
+
     return Center(
       child: FutureBuilder<List<Object>>(
         future: getItemList(),
@@ -73,7 +84,14 @@ class _PageFutureBuilderState extends State<PageFutureBuilder> {
       thumbnail: item.thumbnail,
       description: item.name,
       pageType: PageType.plant,
-      item: item
+      item: item,
+      refresh: () {
+        setState(() {
+          if (widget.pageType == PageType.bookmark) {
+            hasChanged = true;
+          }
+        });
+      },
     );
   }
 
