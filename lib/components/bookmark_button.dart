@@ -18,7 +18,7 @@ class BookmarkButton extends StatefulWidget {
 }
 
 class _BookmarkButtonState extends State<BookmarkButton> {
-  late bool _plantExists;
+  bool? _plantExists;
   late ScaffoldMessengerState _scaffoldMessenger;
 
   @override
@@ -35,10 +35,15 @@ class _BookmarkButtonState extends State<BookmarkButton> {
 
   Future<void> _updatePlantExists() async {
     final plantExists = await LocalDatabase().containsPlant(widget.item.id ?? 0);
+    setState(() { _plantExists = plantExists; });
+  }
 
-    setState(() {
-      _plantExists = plantExists;
-    });
+  IconData? getIcon() {
+    if (_plantExists != null) {
+      return _plantExists! ? Icons.bookmark : Icons.bookmark_add_outlined;
+    }
+
+    return null;
   }
 
   @override
@@ -46,13 +51,10 @@ class _BookmarkButtonState extends State<BookmarkButton> {
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 300),
       child: IconButton(
-        key: ValueKey<bool>(_plantExists),
-        icon: Icon(
-          _plantExists ? Icons.bookmark : Icons.bookmark_add_outlined,
-          color: Colors.white,
-        ),
+        key: ValueKey<bool?>(_plantExists),
+        icon: Icon(getIcon(), color: Colors.white),
         onPressed: () async {
-          if (!_plantExists) {
+          if (_plantExists == false) {
             await LocalDatabase().insertPlant(widget.item);
             showSnackbar('Bookmark added!');
             setState(() { _plantExists = true; });
@@ -62,7 +64,7 @@ class _BookmarkButtonState extends State<BookmarkButton> {
             setState(() { _plantExists = false; });
           }
 
-          widget.onBookmarkStateChange(_plantExists);
+          widget.onBookmarkStateChange(_plantExists!);
         },
       ),
     );

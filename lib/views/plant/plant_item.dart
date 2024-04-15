@@ -20,15 +20,6 @@ class _PlantItemPageState extends State<PlantItemPage> {
   bool? isBookmarkChanged;
 
   @override
-  void dispose() {
-    if (isBookmarkChanged != null) {
-      Navigator.pop(context, true);
-    }
-
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffe3e3e3),
@@ -38,9 +29,7 @@ class _PlantItemPageState extends State<PlantItemPage> {
           BookmarkButton(
             item: widget.item,
             onBookmarkStateChange: (changed) {
-              setState(() {
-                isBookmarkChanged = changed;
-              });
+              setState(() { isBookmarkChanged = changed; });
             },
           )
         ],

@@ -3,7 +3,6 @@ import 'package:greenlist/components/page_list_item.dart';
 import 'package:greenlist/data/model/faq.dart';
 import 'package:greenlist/data/repository/api.dart';
 import 'package:greenlist/data/repository/database.dart';
-
 import '../data/enum/page_type_enum.dart';
 import '../data/model/plant.dart';
 
@@ -22,10 +21,6 @@ class PageFutureBuilder extends StatefulWidget {
 }
 
 class _PageFutureBuilderState extends State<PageFutureBuilder> {
-  late Future<List<Faq>> faqListFuture;
-  late Future<List<Plant>> plantListFuture;
-  late Future<List<Plant>> bookmarkListFuture;
-
   bool hasChanged = false;
 
   Future<List<Object>>? getItemList() {
@@ -33,14 +28,11 @@ class _PageFutureBuilderState extends State<PageFutureBuilder> {
 
     Future<List<Object>>? future;
     if (widget.pageType == PageType.faq) {
-      faqListFuture = Api.getFaqList();
-      future = faqListFuture;
+      future = Api.getFaqList();
     } else if (widget.pageType == PageType.plant) {
-      plantListFuture = Api.getPlantList();
-      future = plantListFuture;
+      future = Api.getPlantList();
     } else {
-      bookmarkListFuture = LocalDatabase().plants();
-      future = bookmarkListFuture;
+      future = LocalDatabase().plants();
     }
 
     return future;
@@ -49,7 +41,6 @@ class _PageFutureBuilderState extends State<PageFutureBuilder> {
   @override
   Widget build(BuildContext context) {
     if (hasChanged) {
-      getItemList();
       widget.onRefresh?.call;
     }
 
@@ -59,9 +50,13 @@ class _PageFutureBuilderState extends State<PageFutureBuilder> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
-          } else if (snapshot.hasData) {
+          } else if (snapshot.hasData && snapshot.data?.isNotEmpty == true) {
             return _buildListItem(widget.pageType, snapshot.data!);
           } else {
+            if (widget.pageType == PageType.bookmark) {
+              return const Text("There is no Plants bookmarked yet!");
+            }
+
             return const Text("No data available! Please, try again later.");
           }
         },
@@ -76,34 +71,32 @@ class _PageFutureBuilderState extends State<PageFutureBuilder> {
         final item = list[index];
 
         return pageType == PageType.faq
-            ? _getFaqPageListItem(item as Faq)
-            : _getPlantPageListItem(item as Plant);
-      },
-    );
-  }
-
-  PageListItem _getPlantPageListItem(Plant item) {
-    return PageListItem(
-      thumbnail: item.thumbnail,
-      description: item.name,
-      pageType: PageType.plant,
-      item: item,
-      refresh: () {
-        setState(() {
-          if (widget.pageType == PageType.bookmark) {
-            hasChanged = true;
-          }
-        });
+          ? _getFaqPageListItem(item as Faq)
+          : _getPlantPageListItem(item as Plant, pageType);
       },
     );
   }
 
   PageListItem _getFaqPageListItem(Faq item) {
     return PageListItem(
-        thumbnail: item.thumbnail,
-        description: item.question,
-        pageType: PageType.faq,
-        item: item
+      thumbnail: item.thumbnail,
+      description: item.question,
+      pageType: PageType.faq,
+      item: item
+    );
+  }
+
+  PageListItem _getPlantPageListItem(Plant item, PageType pageType) {
+    return PageListItem(
+      thumbnail: item.thumbnail,
+      description: item.name,
+      pageType: pageType,
+      item: item,
+      refresh: () {
+        if (widget.pageType == PageType.bookmark) {
+          setState(() { hasChanged = true; });
+        }
+      },
     );
   }
 }
