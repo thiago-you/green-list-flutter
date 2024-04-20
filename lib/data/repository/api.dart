@@ -14,7 +14,7 @@ class Api {
     var url = Uri.parse("https://perenual.com/api/article-faq-list?key=$auth");
 
     final response = await http.get(url, headers: {"Content-Type": "application/json"});
-    final dynamic decodedResponse = json.decode(response.body)["data"];
+    final dynamic decodedResponse = json.decode(response.body);
 
     if (decodedResponse.containsKey('data')) {
       final List<dynamic> body = decodedResponse["data"];
@@ -30,7 +30,7 @@ class Api {
     var url = Uri.parse("https://perenual.com/api/species-list?key=$auth&views=$page");
 
     final response = await http.get(url, headers: {"Content-Type": "application/json"});
-    final dynamic decodedResponse = json.decode(response.body)["data"];
+    final dynamic decodedResponse = json.decode(response.body);
 
     if (decodedResponse.containsKey('data')) {
       final List<dynamic> body = decodedResponse["data"];
